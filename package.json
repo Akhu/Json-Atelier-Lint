@@ -1,0 +1,108 @@
+{
+  "name": "json-lint-local",
+  "productName": "JSON Atelier",
+  "description": "Validateur et formateur JSON local pour macOS",
+  "author": "Anthony Da Cruz",
+  "license": "MIT",
+  "keywords": [
+    "json",
+    "validator",
+    "formatter",
+    "electron",
+    "macos"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "private": true,
+  "version": "0.4.0",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "electron:dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env ELECTRON_RENDERER_URL=http://127.0.0.1:5173 electron .\"",
+    "build": "tsc -b && vite build",
+    "electron:pack": "npm run build && electron-builder --mac dir --universal",
+    "electron:dist": "npm run build && electron-builder --mac dmg --universal",
+    "electron:notarize": "./scripts/notarize.sh",
+    "electron:release": "npm run electron:dist && npm run electron:notarize",
+    "icon": "./scripts/build-icon.sh",
+    "check": "npm test && npm run build",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@codemirror/lang-json": "^6.0.2",
+    "@codemirror/lint": "^6.9.7",
+    "@codemirror/search": "^6.7.2",
+    "@radix-ui/react-dialog": "^1.1.23",
+    "@radix-ui/react-select": "^2.3.7",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@uiw/react-codemirror": "^4.25.12",
+    "@vitejs/plugin-react": "^6.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
+    "electron": "^44.4.5",
+    "electron-builder": "^26.15.3",
+    "fake-indexeddb": "^6.2.5",
+    "lucide-react": "^1.48.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2",
+    "wait-on": "^9.1.0"
+  },
+  "build": {
+    "appId": "fr.kilab.jsonatelier",
+    "productName": "JSON Atelier",
+    "artifactName": "JSON-Atelier-${version}-${arch}.${ext}",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "build/icon.icns",
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "gatekeeperAssess": false,
+      "target": [
+        "dmg"
+      ]
+    },
+    "dmg": {
+      "title": "JSON Atelier",
+      "backgroundColor": "#11120f",
+      "window": {
+        "width": 540,
+        "height": 380
+      },
+      "contents": [
+        {
+          "x": 140,
+          "y": 185,
+          "type": "file"
+        },
+        {
+          "x": 400,
+          "y": 185,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  }
+}

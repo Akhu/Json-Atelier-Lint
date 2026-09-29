@@ -1,0 +1,42 @@
+name: Bug
+description: Signaler un comportement reproductible
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problème observé
+      description: Décris ce qui se passe, sans coller de données sensibles.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: |
+        1. Ouvrir…
+        2. Coller un JSON factice…
+        3. Cliquer sur…
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Résultat attendu
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version de JSON Atelier
+      placeholder: 0.4.0
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: Version de macOS et type de Mac
+      placeholder: macOS 26, Apple Silicon
+    validations:
+      required: true
