@@ -2,10 +2,12 @@
 set -euo pipefail
 
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
-VERSION="$(node -p "require('$PROJECT_DIR/package.json').version")"
-DMG_PATH="${1:-$PROJECT_DIR/release/JSON-Atelier-${VERSION}-universal.dmg}"
+DMG_PATH="${1:-$PROJECT_DIR/release/JSON-Atelier-universal.dmg}"
+# electron-builder veut CSC_NAME sans préfixe, codesign veut l'identité complète
+CSC_NAME="${CSC_NAME:?Définis CSC_NAME avec le nom de ton identité, sans le préfixe Developer ID Application}"
+SIGNING_IDENTITY="Developer ID Application: ${CSC_NAME#Developer ID Application: }"
+
 PROFILE="${NOTARY_PROFILE:?Définis NOTARY_PROFILE avec le profil notarytool du Trousseau}"
-SIGNING_IDENTITY="${CSC_NAME:?Définis CSC_NAME avec ton identite Developer ID Application}"
 
 if [[ ! -f "$DMG_PATH" ]]; then
   echo "DMG introuvable : $DMG_PATH" >&2

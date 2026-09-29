@@ -45,12 +45,31 @@ Les artefacts macOS arrivent dans `release/`. Le build universel contient les ar
 La distribution publique demande un certificat `Developer ID Application` et un profil `notarytool` enregistré dans le Trousseau. Aucun identifiant Apple n'est stocké dans ce dépôt.
 
 ```bash
-export CSC_NAME="Developer ID Application: Votre nom (TEAMID)"
+export CSC_NAME="Votre nom (TEAMID)"
 export NOTARY_PROFILE="json-atelier-notary"
 npm run electron:release
 ```
 
 La commande construit le DMG, le signe, l'envoie à Apple, agrafe le ticket de notarisation et lance la vérification Gatekeeper.
+
+## Publier une version
+
+Les versions sont construites, signées et notarisées en local, puis déposées dans l'onglet Releases. Une seule fois, enregistre un profil de notarisation dans le Trousseau (Apple ID, Team ID et mot de passe d'application) :
+
+```bash
+xcrun notarytool store-credentials json-atelier-notary
+```
+
+Pour chaque version, mets `version` à jour dans `package.json` et `CHANGELOG.md`, puis :
+
+```bash
+export CSC_NAME="Votre nom (TEAMID)"
+export NOTARY_PROFILE="json-atelier-notary"
+npm run electron:release
+gh release create v0.5.0 release/JSON-Atelier-universal.dmg --title "v0.5.0" --generate-notes
+```
+
+Le DMG garde le même nom à chaque version. Le lien `https://github.com/Akhu/Json-Atelier-Lint/releases/latest/download/JSON-Atelier-universal.dmg` pointe donc toujours vers la dernière release.
 
 ## Stack
 

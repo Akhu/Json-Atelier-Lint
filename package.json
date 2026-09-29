@@ -62,7 +62,7 @@
   "build": {
     "appId": "fr.kilab.jsonatelier",
     "productName": "JSON Atelier",
-    "artifactName": "JSON-Atelier-${version}-${arch}.${ext}",
+    "artifactName": "JSON-Atelier-${arch}.${ext}",
     "asar": true,
     "directories": {
       "output": "release"
