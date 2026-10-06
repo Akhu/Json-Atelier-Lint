@@ -4,6 +4,13 @@ JSON Atelier est un éditeur JSON local pour macOS. Il valide, formate, minifie 
 
 ![JSON Atelier avec la recherche dans l'historique](docs/images/json-atelier.png)
 
+## Télécharger l'application
+
+Tu peux télécharger la version macOS depuis l'onglet [Releases](https://github.com/Akhu/Json-Atelier-Lint/releases) de GitHub.
+
+- Dernière version directe (.dmg) : https://github.com/Akhu/Json-Atelier-Lint/releases/latest/download/JSON-Atelier-universal.dmg
+- Ouvre le `.dmg`, puis glisse l'app `JSON Atelier.app` dans `Applications`
+
 ## Ce que l'application sait faire
 
 - Validation JSON avec erreur, ligne et colonne.
