@@ -46,7 +46,7 @@
     "clsx": "^2.1.1",
     "concurrently": "^10.0.5",
     "cross-env": "^10.1.0",
-    "electron": "^44.4.5",
+    "electron": "^44.5.1",
     "electron-builder": "^26.15.3",
     "fake-indexeddb": "^6.2.5",
     "lucide-react": "^1.48.0",
